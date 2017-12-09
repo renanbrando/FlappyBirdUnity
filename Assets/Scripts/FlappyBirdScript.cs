@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlappyBirdScript : MonoBehaviour {
 
 	public float pulse;
-	bool isPlaying;
+
+	//Available for entire game
+	public static bool isPlaying;
 
 	//Components
 	Rigidbody2D rb;
@@ -30,5 +33,15 @@ public class FlappyBirdScript : MonoBehaviour {
 		} else if (isPlaying && Input.GetButtonDown("Fire1")){
 			rb.velocity = new Vector2 (0.0f, pulse);
 		}
+	}
+
+
+	// Detects collision with trigger
+	void OnTriggerEnter2D(Collider2D c){
+		MainScript.score++;
+	}
+		
+	void OnCollisionEnter2D(Collision2D c){
+		SceneManager.LoadScene("start");
 	}
 }
